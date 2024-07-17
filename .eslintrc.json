@@ -7,9 +7,10 @@
         "eslint:recommended",
         "plugin:react/recommended"
     ],
-    "overrides": [
+    "overrides": [],
+    "ignorePatterns": [
+        "gdpr.js"
     ],
-    "ignorePatterns": ["gdpr.js"],
     "globals": {
         "process": "readonly",
         "Buffer": "readonly"
@@ -22,10 +23,7 @@
         "react"
     ],
     "rules": {
-        "indent": [
-            "error",
-            "tab"
-        ],
+        "indent": "off",
         "quotes": [
             "error",
             "single"
@@ -96,15 +94,26 @@
         ],
         "capitalized-comments": "warn",
         "spaced-comment": "warn",
-        "complexity": ["error", 5],
-        "max-depth": ["error", {"max": 3}],
+        "complexity": [
+            "error",
+            5
+        ],
+        "max-depth": [
+            "error",
+            {
+                "max": 3
+            }
+        ],
         "curly": "error",
         "default-case": "warn",
         "default-case-last": "error",
         "default-param-last": "error",
         "eqeqeq": "warn",
         "guard-for-in": "warn",
-        "max-params": ["warn", 3],
+        "max-params": [
+            "warn",
+            3
+        ],
         "no-delete-var": "error",
         "no-empty": "error",
         "no-empty-function": "warn",
@@ -133,7 +142,10 @@
         "no-var": "error",
         "no-void": "warn",
         "no-with": "error",
-        "one-var-declaration-per-line": ["error", "always"],
+        "one-var-declaration-per-line": [
+            "error",
+            "always"
+        ],
         "prefer-const": "error",
         "prefer-object-has-own": "warn",
         "prefer-rest-params": "error",

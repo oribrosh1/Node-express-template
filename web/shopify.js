@@ -11,6 +11,12 @@ const shopify = shopifyApp({
 	api: {
 		apiVersion: ApiVersion.October23,
 		restResources,
+		apiKey: process.env.SHOPIFY_API_KEY,
+		apiSecretKey: process.env.SHOPIFY_API_SECRET,
+		scopes: process.env.SHOPIFY_API_SCOPES.split(','),
+		hostScheme: 'http',
+
+		hostName: process.env.HOST_NAME
 	},
 	auth: {
 		path: '/api/auth',
