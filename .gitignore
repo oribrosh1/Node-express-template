@@ -28,6 +28,7 @@ extensions/*/build
 # Node library SQLite database
 web/database.sqlite
 
-# Only the backend code should be pushed to github. We will see the section you develop in your storefront.
+
+# Ignore directories for extensions and frontend
 extensions/
-extensions/frontend/
+web/frontend/
