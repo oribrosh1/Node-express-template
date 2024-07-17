@@ -1,5 +1,5 @@
-const saveCartSession = async (shopify, { shop, isOnline, userId, sessionId, state }) => {
-    const result = await shopify.config.sessionStorage.prisma.session.upsert({
+const saveCartSession = async (prisma, { shop, isOnline, userId, sessionId, state }) => {
+    const result = await prisma.session.upsert({
         where: {
             // Condition to check existing session
             userId: userId,
@@ -22,8 +22,8 @@ const saveCartSession = async (shopify, { shop, isOnline, userId, sessionId, sta
     return result;
 };
 
-const findCartSessionByUserId = async (shopify, userId) => {
-    const result = await shopify.config.sessionStorage.prisma.session.findUnique({
+const findCartSessionByUserId = async (prisma, userId) => {
+    const result = await prisma.session.findUnique({
         where: { userId },
     });
     return result;

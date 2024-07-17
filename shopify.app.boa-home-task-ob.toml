@@ -3,7 +3,7 @@
 client_id = "88b30806de29bd1395ddabbaf830de3a"
 name = "boa-home-task-OB"
 handle = "boa-home-task-ob-1"
-application_url = "https://mouth-dispatch-stupid-cartoon.trycloudflare.com"
+application_url = "https://fixtures-external-posters-creator.trycloudflare.com"
 embedded = true
 
 [build]
@@ -16,16 +16,16 @@ scopes = ""
 
 [auth]
 redirect_urls = [
-  "https://mouth-dispatch-stupid-cartoon.trycloudflare.com/auth/callback",
-  "https://mouth-dispatch-stupid-cartoon.trycloudflare.com/auth/shopify/callback",
-  "https://mouth-dispatch-stupid-cartoon.trycloudflare.com/api/auth/callback"
+  "https://fixtures-external-posters-creator.trycloudflare.com/auth/callback",
+  "https://fixtures-external-posters-creator.trycloudflare.com/auth/shopify/callback",
+  "https://fixtures-external-posters-creator.trycloudflare.com/api/auth/callback"
 ]
 
 [webhooks]
 api_version = "2024-07"
 
 [app_proxy]
-url = "https://mouth-dispatch-stupid-cartoon.trycloudflare.com/cartsession"
+url = "https://fixtures-external-posters-creator.trycloudflare.com/cartsession"
 subpath = "proxy"
 prefix = "apps"
 

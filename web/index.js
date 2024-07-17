@@ -3,6 +3,9 @@ import { readFileSync } from 'fs';
 import express from 'express';
 import cors from 'cors';
 import serveStatic from 'serve-static';
+import dotenv from 'dotenv';
+import session from 'express-session';
+dotenv.config();
 
 import shopify from './shopify.js';
 import webhooks from './webhooks.js';
@@ -18,7 +21,15 @@ const STATIC_PATH =
 
 const app = express();
 
-app.use(cors({ origin: '*' }));
+
+app.use(session({
+	secret: process.env.SECRET_KEY,
+	resave: false,
+	saveUninitialized: true,
+}));
+
+// Added CORS for 'https://home-assignment-76.myshopify.com' and 'https://extensions.shopifycdn.com'
+app.use(cors({ origin: process.env.ALLOWED_ORIGINS.split(',') ?? ['https://home-assignment-76.myshopify.com', 'https://extensions.shopifycdn.com'] }));
 
 // Set up Shopify authentication and webhook handling
 app.get(shopify.config.auth.path, shopify.auth.begin());
@@ -40,10 +51,33 @@ app.use('/api/*', shopify.validateAuthenticatedSession());
 app.use(express.json());
 app.use(serveStatic(STATIC_PATH, { index: false }));
 
+// Middleware to attach prisma utilities to the request object.
+app.use(async (req, _res, next) => {
+
+	// Check if the shopify object is correctly initialized
+	if (!shopify || typeof shopify !== 'object') {
+		console.error('Shopify instance is not initialized correctly.');
+		return next(new Error('Shopify instance is not initialized correctly.'));
+	}
+	// Initialize if not present
+	if (!req.usePrisma) {
+		req.usePrisma = {};
+	}
+	// Attach only the prisma from shopify sessionStorage sessionStorage 
+	req.usePrisma = shopify.config.sessionStorage.prisma;
+	next();
+});
+
 app.use('/cartsession', cartSessionRoutes);
 
+// Not Working when putting `app.use('/cartsession', cartSessionRoutes);` below this middleware
+// 	LOG:
+//   Running ensureInstalledOnShop
+//   Beginning OAuth | {shop:
+// 	 home-assignment-76.myshopify.com, isOnline: false, callbackPath: /api/auth/callback}
 app.use('/*', shopify.ensureInstalledOnShop(), async (_req, res) => {
 	return res.set('Content-Type', 'text/html').send(readFileSync(join(STATIC_PATH, 'index.html')));
 });
+
 
 app.listen(PORT);

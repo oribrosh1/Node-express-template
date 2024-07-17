@@ -22,13 +22,6 @@ const STATUS_TYPES = {
     GATEWAY_TIMEOUT: 504
 };
 
-// Generate a unique Session Id based on user ID and timestamp
-function generateSessionId(userId) {
-    const timestamp = Date.now(); // Get current timestamp
-    return `${userId}-${timestamp}`;
-}
-
-
 function safeJsonStringify(data) {
     return JSON.stringify(data, (_, value) =>
         typeof value === 'bigint' ? value.toString() : value
@@ -50,4 +43,4 @@ function normalizeCartAndUserId(body) {
     return { userId, state };
 }
 
-export { STATUS_TYPES, generateSessionId, safeJsonStringify, normalizeCartAndUserId };
+export { STATUS_TYPES, safeJsonStringify, normalizeCartAndUserId };
