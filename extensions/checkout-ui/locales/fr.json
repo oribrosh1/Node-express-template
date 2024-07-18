@@ -1,0 +1,8 @@
+{
+  "welcome": "Bienvenue dans l'extension {{target}}!",
+  "iWouldLikeAFreeGiftWithMyOrder": "Je souhaite recevoir un cadeau gratuit avec ma commande",
+  "bannertext": "Save Your Cart",
+  "savebtn": "Save",
+  "successtext": "Your Cart Was Saved Successfully!",
+  "error": "Error!\n"
+}

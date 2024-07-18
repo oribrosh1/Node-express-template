@@ -28,7 +28,4 @@ extensions/*/build
 # Node library SQLite database
 web/database.sqlite
 
-
-# Ignore directories for extensions and frontend
-extensions/
-web/frontend/
+web/frontend/node_modules/
