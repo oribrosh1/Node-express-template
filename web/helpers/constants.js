@@ -17,7 +17,6 @@ function normalizeCartAndUserId(body) {
         id: item.id.replace(/gid:\/\/shopify\/(Product|ProductVariant)\//g, ''),
         quantity: item.quantity
     }));
-    console.log(items);
 
     let customerId = body.customerId;
     // Store only the Id Number of the guid of the customer
