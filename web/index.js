@@ -4,13 +4,12 @@ import express from 'express';
 import cors from 'cors';
 import serveStatic from 'serve-static';
 import dotenv from 'dotenv';
-import session from 'express-session';
 dotenv.config();
 
 import shopify from './shopify.js';
 import webhooks from './webhooks.js';
 
-import cartSessionRoutes from './routes/cartSessionRoutes.js';
+import cartSessionRoutes from './routes/cartRoutes.js';
 
 const PORT = parseInt(process.env.BACKEND_PORT || process.env.PORT, 10);
 
@@ -20,13 +19,6 @@ const STATIC_PATH =
 		: `${process.cwd()}/frontend/`;
 
 const app = express();
-
-
-app.use(session({
-	secret: process.env.SECRET_KEY,
-	resave: false,
-	saveUninitialized: true,
-}));
 
 // Added CORS for 'https://home-assignment-76.myshopify.com' and 'https://extensions.shopifycdn.com'
 app.use(cors({ origin: process.env.ALLOWED_ORIGINS.split(',') ?? ['https://home-assignment-76.myshopify.com', 'https://extensions.shopifycdn.com'] }));
@@ -68,7 +60,8 @@ app.use(async (req, _res, next) => {
 	next();
 });
 
-app.use('/cartsession', cartSessionRoutes);
+app.use('/cart', cartSessionRoutes);
+
 
 // Not Working when putting `app.use('/cartsession', cartSessionRoutes);` below this middleware
 // 	LOG:

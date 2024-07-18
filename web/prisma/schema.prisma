@@ -7,24 +7,20 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-// Column: state       String    @db.Text
-// stckoverflow question:
-// I want an alternative for long Text type in MySql with Prisma
-// error: Type "TEXT" is neither a built-in type, nor refers to another model, custom type, or enum.
-
-// stckoverflow answer:
-// You have to use String with either the @db.Text or @db.LongText mapping, without it the MySql database mapping by default is varchar(191). See prisma.io/docs/reference/api-reference/prisma-schema-reference#mysql
-// field String @db.Text
-
 model Session {
-  id          String    @id @default(uuid())
+  id          String    @id
   shop        String
-  state       String    @db.Text
+  state       String
   isOnline    Boolean   @default(false)
   scope       String?
   expires     DateTime?
-  accessToken String?
-  userId      BigInt    @unique
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
+  accessToken String
+  userId      BigInt?
+}
+
+model Cart {
+  customerId BigInt     @id @unique
+  items      Json
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
 }

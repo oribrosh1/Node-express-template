@@ -3,7 +3,7 @@
 client_id = "88b30806de29bd1395ddabbaf830de3a"
 name = "boa-home-task-OB"
 handle = "boa-home-task-ob-1"
-application_url = "https://fixtures-external-posters-creator.trycloudflare.com"
+application_url = "https://butts-uruguay-poems-templates.trycloudflare.com"
 embedded = true
 
 [build]
@@ -16,16 +16,16 @@ scopes = ""
 
 [auth]
 redirect_urls = [
-  "https://fixtures-external-posters-creator.trycloudflare.com/auth/callback",
-  "https://fixtures-external-posters-creator.trycloudflare.com/auth/shopify/callback",
-  "https://fixtures-external-posters-creator.trycloudflare.com/api/auth/callback"
+  "https://butts-uruguay-poems-templates.trycloudflare.com/auth/callback",
+  "https://butts-uruguay-poems-templates.trycloudflare.com/auth/shopify/callback",
+  "https://butts-uruguay-poems-templates.trycloudflare.com/api/auth/callback"
 ]
 
 [webhooks]
 api_version = "2024-07"
 
 [app_proxy]
-url = "https://fixtures-external-posters-creator.trycloudflare.com/cartsession"
+url = "https://butts-uruguay-poems-templates.trycloudflare.com/cart"
 subpath = "proxy"
 prefix = "apps"
 

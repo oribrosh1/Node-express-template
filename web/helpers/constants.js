@@ -1,25 +1,7 @@
 const STATUS_TYPES = {
     OK: 200,
-    CREATED: 201,
-    ACCEPTED: 202,
-    NO_CONTENT: 204,
-    MOVED_PERMANENTLY: 301,
-    FOUND: 302,
-    SEE_OTHER: 303,
-    NOT_MODIFIED: 304,
-    BAD_REQUEST: 400,
-    UNAUTHORIZED: 401,
-    FORBIDDEN: 403,
     NOT_FOUND: 404,
-    METHOD_NOT_ALLOWED: 405,
-    NOT_ACCEPTABLE: 406,
-    CONFLICT: 409,
-    GONE: 410,
     INTERNAL_SERVER_ERROR: 500,
-    NOT_IMPLEMENTED: 501,
-    BAD_GATEWAY: 502,
-    SERVICE_UNAVAILABLE: 503,
-    GATEWAY_TIMEOUT: 504
 };
 
 function safeJsonStringify(data) {
@@ -29,18 +11,18 @@ function safeJsonStringify(data) {
 }
 
 function normalizeCartAndUserId(body) {
-    // The state of the cart should be stored as a string
-    let state = body.state;
-    if (typeof state === 'object') {
-        state = JSON.stringify(state);
-    }
-    // Store only the ID Number of the guid of the product
-    state = state.replace(/gid:\/\/shopify\/Product\//g, '').replace(/gid:\/\/shopify\/ProductVariant\//g, '');
 
-    let userId = body.userId;
-    // Store only the ID Number of the guid of the customer
-    userId = userId.replace(/gid:\/\/shopify\/Customer\//g, '');
-    return { userId, state };
+    // Store only the Id Number of the guid of the product
+    const items = body.itemsToSave.map((item) => ({
+        id: item.id.replace(/gid:\/\/shopify\/(Product|ProductVariant)\//g, ''),
+        quantity: item.quantity
+    }));
+    console.log(items);
+
+    let customerId = body.customerId;
+    // Store only the Id Number of the guid of the customer
+    customerId = Number(customerId.replace(/gid:\/\/shopify\/Customer\//g, ''));
+    return { customerId, items };
 }
 
 export { STATUS_TYPES, safeJsonStringify, normalizeCartAndUserId };
